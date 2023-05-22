@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/blue4"
+    tools:context=".backoffice.BackOfficeActivity">
+
+    <TextView
+        android:id="@+id/txv_backoffice_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back-office"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/txv_backoffice_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Que voulez-vous faire ?"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/txv_backoffice_title"
+        android:textSize="22sp"/>
+
+    <Button
+        android:id="@+id/btn_gerer_questions"
+        android:backgroundTint="@color/blue5"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gérer les questions"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/txv_backoffice_title2"/>
+
+    <Button
+        android:id="@+id/btn_gerer_categories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue5"
+        android:text="Gérer les catégories"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/btn_gerer_questions"/>
+
+    <Button
+        android:id="@+id/btn_gerer_banque_images"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue5"
+        android:textColor="@color/white"
+        android:text="Gérer la banque d'image"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/btn_gerer_categories"/>
+
+    <Button
+        android:id="@+id/btn_gerer_parametres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue5"
+        android:textColor="@color/white"
+        android:text="Parametres generaux"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/btn_gerer_banque_images"/>
+
+</RelativeLayout>

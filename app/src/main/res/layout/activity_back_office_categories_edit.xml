@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue4"
+    tools:context=".backoffice.BackOfficeCategoriesEditActivity">
+
+    <TextView
+        android:id="@+id/txv_title_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Catégorie management"
+        android:textColor="@color/black"
+        android:textSize="35sp" />
+
+
+
+    <TextView
+        android:id="@+id/txv_libelle_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Libellé:"
+        android:layout_alignStart="@+id/txv_title_categorie"
+        android:layout_below="@+id/txv_title_categorie"
+        android:textSize="20sp"
+        android:layout_marginRight="15dp"
+        android:layout_alignBaseline="@+id/edt_libelle_categorie_label"
+        />
+
+    <EditText
+        android:id="@+id/edt_libelle_categorie_label"
+
+        android:layout_marginTop="50dp"
+        android:inputType="textMultiLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/txv_libelle_label"
+        android:layout_below="@+id/txv_title_categorie"
+        android:layout_alignEnd="@+id/txv_title_categorie"
+        />
+
+
+    <Button
+        android:id="@+id/btn_add_new_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue5"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:text="Ajouter categorie" />
+</RelativeLayout>

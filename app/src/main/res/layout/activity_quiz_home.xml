@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/blue4"
+    tools:context=".QuizHomeActivity">
+
+    <TextView
+        android:id="@+id/txv_backoffice_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textSize="30sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Veuillez choisir une catégorie et une difficulté"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/txv_backoffice_title"
+        android:textSize="22sp"/>
+    <Button
+        android:id="@+id/btn_start_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/blue5"
+        android:textColor="@color/white"
+        android:text="Start Quiz" />
+
+    <Spinner
+        android:id="@+id/spn_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_alignStart="@+id/btn_start_quiz"
+        android:layout_below="@+id/btn_start_quiz"
+        ></Spinner>
+
+    <Spinner
+        android:id="@+id/spn_difficulte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_alignStart="@+id/btn_start_quiz"
+        android:layout_below="@+id/spn_categorie"
+        ></Spinner>
+
+</RelativeLayout>

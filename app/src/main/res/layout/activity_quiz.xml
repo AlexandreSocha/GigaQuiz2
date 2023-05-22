@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/blue4"
+    tools:context=".QuizActivity">
+    <TextView
+        android:id="@+id/txv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textColor="@color/black"
+        android:freezesText="true"/>
+
+    <TextView
+        android:id="@+id/txv_question_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txv_score"
+        android:text="Question: 1/x"
+        android:textColor="@color/black"
+        android:freezesText="true"/>
+
+    <TextView
+        android:id="@+id/txv_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txv_question_count"
+        android:text="Category: "
+        android:textColor="@color/black"
+        android:freezesText="true"/>
+
+    <TextView
+        android:id="@+id/text_view_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txv_categorie"
+        android:text="Difficulty: "
+        android:textColor="@color/black"
+        android:freezesText="true"/>
+
+
+    <TextView
+        android:id="@+id/txv_question"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
+        android:text="Here will be the question test\nHere will be the question test\nHere will be the question test"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:freezesText="true"/>
+
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:max="100"
+        android:progress="0"
+        android:layout_below="@+id/txv_question"/>
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_marginTop="8dp"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:weightSum="1.0"
+        android:layout_below="@+id/progressbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight=".5"
+            android:weightSum="1.0">
+
+            <Button
+                android:id="@+id/btn_answer_1"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:layout_marginRight="4dp"
+                android:text="button 1"/>
+            <Button
+                android:id="@+id/btn_answer_2"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:layout_marginLeft="4dp"
+                android:text="button 2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:layout_margin="0dp"
+            android:weightSum="1.0">
+
+            <Button
+                android:id="@+id/btn_answer_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="4dp"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:text="button 3"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_answer_4"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:layout_marginLeft="4dp"
+                android:text="button 4"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_confirm_next"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttons_container"
+        android:layout_marginTop="16dp"
+        android:text="Continuer"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/blue5"
+        android:freezesText="true"/>
+</RelativeLayout>
