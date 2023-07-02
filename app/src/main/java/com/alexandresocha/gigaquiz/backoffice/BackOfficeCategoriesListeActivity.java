@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alexandresocha.gigaquiz.DbHelper;
 import com.alexandresocha.gigaquiz.QuestionCategorie;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 public class BackOfficeCategoriesListeActivity extends AppCompatActivity {
 
     private ListView listView;
+    private ArrayAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,14 @@ public class BackOfficeCategoriesListeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_back_office_categories_liste);
 
         listView = (ListView) findViewById(R.id.lvw_categories);
-        populateListView();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(BackOfficeCategoriesListeActivity.this, BackOfficeCategoriesEditActivity.class);
+                intent.putExtra("selected_category", String.valueOf(myAdapter.getItemId(i)));
+                startActivity(intent);
+            }
+        });
 
         Button btn = findViewById(R.id.btn_liste_categories_gerer_categories);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -38,13 +48,18 @@ public class BackOfficeCategoriesListeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        populateListView();
+    }
 
     public void populateListView() {
 
         DbHelper db = DbHelper.getInstance(this);
         ArrayList<QuestionCategorie> categories = db.getAllCategories();
-        ListAdapter a = new ArrayAdapter<QuestionCategorie>(this,
+        myAdapter = new ArrayAdapter<QuestionCategorie>(this,
                 android.R.layout.simple_list_item_1, categories);
-        listView.setAdapter(a);
+        listView.setAdapter(myAdapter);
     }
 }

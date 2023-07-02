@@ -4,6 +4,8 @@ package com.alexandresocha.gigaquiz;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class Question implements Parcelable {
 
     public static final String DIFFICULTY_EASY = "Easy";
@@ -156,5 +158,12 @@ public class Question implements Parcelable {
                 DIFFICULTY_MEDIUM,
                 DIFFICULTY_HARD
         };
+    }
+
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getCategoryID() + " - " + getDifficulty() + " - " + getQuestion();
     }
 }

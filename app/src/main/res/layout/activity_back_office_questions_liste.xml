@@ -23,15 +23,55 @@
         android:layout_below="@+id/txv_backoffice_liste_questions_title"
         android:textSize="22sp"/>
 
-    <Button
-        android:id="@+id/btn_liste_questions_gerer_questions"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/container_ajouter_btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter"
-        android:layout_centerInParent="true"
+        android:layout_below="@+id/txv_backoffice_liste_questions_title2">
+
+        <Button
+            android:id="@+id/btn_liste_questions_gerer_questions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:backgroundTint="@color/blue5"
+            android:text="Ajouter"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actions_container_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:backgroundTint="@color/blue5"
-        android:textColor="@color/white"
-        android:layout_below="@+id/txv_backoffice_liste_questions_title2"/>
+        android:layout_below="@+id/container_ajouter_btn">
+        <Spinner
+            android:id="@+id/spn_categ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></Spinner>
+        <Spinner
+            android:id="@+id/spn_diffi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+        <Button
+            android:id="@+id/btn_filtrer_questions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filtrer"
+            android:layout_centerInParent="true"
+            android:backgroundTint="@color/blue5"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvw_categ"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/actions_container_1"/>
+
+
+
 
 </RelativeLayout>

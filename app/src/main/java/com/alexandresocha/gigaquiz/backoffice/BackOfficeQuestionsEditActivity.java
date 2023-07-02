@@ -2,12 +2,14 @@ package com.alexandresocha.gigaquiz.backoffice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.alexandresocha.gigaquiz.DbHelper;
 import com.alexandresocha.gigaquiz.Question;
@@ -18,9 +20,20 @@ import java.util.List;
 
 public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
 
+    private String questionId;
+    private boolean isEdit = false;
     private Spinner spinnerCategory;
     private Spinner spinnerDifficulty;
     private Spinner spinnerAnswers;
+
+    private EditText questionText;
+    private EditText answer1;
+    private EditText answer2;
+    private EditText answer3;
+    private EditText answer4;
+
+    private ArrayAdapter<String> adapterDifficulty;
+    private ArrayAdapter<QuestionCategorie> adapterCategories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +41,27 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         spinnerCategory = findViewById(R.id.spinner_category2);
         spinnerDifficulty = findViewById(R.id.spinner_difficulty2);
         spinnerAnswers = findViewById(R.id.spinner_answer);
+        questionText = findViewById(R.id.edit_text_question);
+        answer1 = findViewById(R.id.edit_text_answer_1);
+        answer2 = findViewById(R.id.edit_text_answer_2);
+        answer3 = findViewById(R.id.edit_text_answer_3);
+        answer4 = findViewById(R.id.edit_text_answer_4);
 
         loadCategories();
         loadDifficulties();
         loadAnswerSpinner();
+
+        Intent intent = getIntent();
+        Question q = intent.getParcelableExtra("selectedQuestion");
+
+        if(q != null){
+            isEdit = true;
+            questionId = String.valueOf(q.getId());
+            populateFields(q);
+            Toast.makeText(BackOfficeQuestionsEditActivity.this, q.getQuestion(), Toast.LENGTH_LONG).show();
+        }
+
+
 
         Button btn = findViewById(R.id.btn_add_new_question);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +71,27 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+    }
+
+    private void populateFields(Question q){
+        questionText.setText(q.getQuestion());
+        answer1.setText(q.getOption1());
+        answer2.setText(q.getOption2());
+        answer3.setText(q.getOption3());
+        answer4.setText(q.getOption4());
+        spinnerAnswers.setSelection(q.getAnswerNr());
+
+        int positionDifficulty = adapterDifficulty.getPosition(q.getDifficulty());
+        spinnerDifficulty.setSelection(positionDifficulty);
+
+        DbHelper dbHelper = DbHelper.getInstance(this);
+
+        QuestionCategorie categ = dbHelper.getCategory(q.getCategoryID());
+        int positionCategory = adapterCategories.getPosition(categ);
+        Toast.makeText(this, "positionCategory : " + positionCategory, Toast.LENGTH_LONG).show();
+        spinnerCategory.setSelection(positionCategory);
     }
 
     private void addNewQuestion(){
@@ -72,16 +123,14 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         DbHelper dbHelper = DbHelper.getInstance(this);
         List<QuestionCategorie> categories = dbHelper.getAllCategories();
 
-        ArrayAdapter<QuestionCategorie> adapterCategories = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, categories);
+        adapterCategories = new ArrayAdapter<QuestionCategorie>(this, android.R.layout.simple_spinner_item, categories);
         adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(adapterCategories);
     }
     private void loadDifficulties(){
         String[] difficultyLevels = Question.getAllDifficultyLevels();
 
-        ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, difficultyLevels);
+        adapterDifficulty = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, difficultyLevels);
         adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDifficulty.setAdapter(adapterDifficulty);
     }

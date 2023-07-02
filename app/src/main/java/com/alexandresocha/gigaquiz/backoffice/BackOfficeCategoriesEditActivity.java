@@ -2,10 +2,12 @@ package com.alexandresocha.gigaquiz.backoffice;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.alexandresocha.gigaquiz.DbHelper;
 import com.alexandresocha.gigaquiz.Question;
@@ -18,6 +20,10 @@ public class BackOfficeCategoriesEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_back_office_categories_edit);
+
+        Intent intent = getIntent();
+        String value = intent.getStringExtra("selected_category");
+        Toast.makeText(BackOfficeCategoriesEditActivity.this, " "+value+" ", Toast.LENGTH_LONG).show();
 
         Button btn = findViewById(R.id.btn_add_new_categorie);
         btn.setOnClickListener(new View.OnClickListener() {

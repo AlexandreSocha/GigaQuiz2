@@ -165,6 +165,28 @@ public class DbHelper extends SQLiteOpenHelper {
         c.close();
         return categoryList;
     }
+    @SuppressLint("Range")
+    public QuestionCategorie getCategory(int categoryID){
+        ArrayList<QuestionCategorie> categoryList = new ArrayList<>();
+        db = getReadableDatabase();
+
+        String selection = Table.Categories._ID + " = ? ";
+        String[] selectionArgs = new String[]{ String.valueOf(categoryID) };
+
+        Cursor c = db.query(Table.Categories.TABLE_NAME,null,
+                selection, selectionArgs,null,null,null );
+
+        if(c.moveToFirst()){
+            do {
+                QuestionCategorie category = new QuestionCategorie();
+                category.setId(c.getInt(c.getColumnIndex(Table.Categories._ID)));
+                category.setName(c.getString(c.getColumnIndex(Table.Categories.COL_LIBELLE)));
+                categoryList.add(category);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return categoryList.get(0);
+    }
 
     @SuppressLint("Range")
     public ArrayList<Question> getAllQuestions(){
