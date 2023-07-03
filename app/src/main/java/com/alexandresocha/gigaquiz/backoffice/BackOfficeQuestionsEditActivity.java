@@ -34,6 +34,8 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapterDifficulty;
     private ArrayAdapter<QuestionCategorie> adapterCategories;
+
+    private ArrayAdapter<String> adapterAnswers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +56,6 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Question q = intent.getParcelableExtra("selectedQuestion");
 
-        if(q != null){
-            isEdit = true;
-            questionId = String.valueOf(q.getId());
-            populateFields(q);
-            Toast.makeText(BackOfficeQuestionsEditActivity.this, q.getQuestion(), Toast.LENGTH_LONG).show();
-        }
-
-
-
         Button btn = findViewById(R.id.btn_add_new_question);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +64,28 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Button btnUpdate = findViewById(R.id.btn_update_question);
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateQuestion();
+                finish();
+            }
+        });
+
+        if(q != null){
+            isEdit = true;
+            questionId = String.valueOf(q.getId());
+            populateFields(q);
+            btn.setVisibility(View.INVISIBLE);
+            btnUpdate.setVisibility(View.VISIBLE);
+        }
+        else {
+            btn.setVisibility(View.VISIBLE);
+            btnUpdate.setVisibility(View.INVISIBLE);
+        }
+
 
 
     }
@@ -81,13 +96,17 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         answer2.setText(q.getOption2());
         answer3.setText(q.getOption3());
         answer4.setText(q.getOption4());
-        spinnerAnswers.setSelection(q.getAnswerNr());
+
+        int positionAnswer = adapterAnswers.getPosition(String.valueOf(q.getAnswerNr()));
+        spinnerAnswers.setSelection(positionAnswer);
 
         int positionDifficulty = adapterDifficulty.getPosition(q.getDifficulty());
         spinnerDifficulty.setSelection(positionDifficulty);
 
         DbHelper dbHelper = DbHelper.getInstance(this);
 
+        // c'est ici que ça marche pas, positionCategory est toujours -1
+        // alors que l'item est bien dans la liste
         QuestionCategorie categ = dbHelper.getCategory(q.getCategoryID());
         int positionCategory = adapterCategories.getPosition(categ);
         Toast.makeText(this, "positionCategory : " + positionCategory, Toast.LENGTH_LONG).show();
@@ -119,6 +138,31 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         db.addQuestion(question);
     }
 
+    private void updateQuestion(){
+        DbHelper db = DbHelper.getInstance(this);
+        EditText editTextQuestion = findViewById(R.id.edit_text_question);
+        String questionText = editTextQuestion.getText().toString();
+        EditText editTextAns1 = findViewById(R.id.edit_text_answer_1);
+        String answer1Text = editTextAns1.getText().toString();
+        EditText editTextAns2 = findViewById(R.id.edit_text_answer_2);
+        String answer2Text = editTextAns2.getText().toString();
+        EditText editTextAns3 = findViewById(R.id.edit_text_answer_3);
+        String answer3Text = editTextAns3.getText().toString();
+        EditText editTextAns4 = findViewById(R.id.edit_text_answer_4);
+        String answer4Text = editTextAns4.getText().toString();
+
+        QuestionCategorie selectedCategory = (QuestionCategorie) spinnerCategory.getSelectedItem();
+        int categoryID = selectedCategory.getId();
+        //String categoryName = selectedCategory.getName();
+
+        String difficulty = spinnerDifficulty.getSelectedItem().toString();
+        int answer = Integer.parseInt(spinnerAnswers.getSelectedItem().toString());
+
+        Question question = new Question(questionText, answer1Text, answer2Text,
+                answer3Text, answer4Text, answer, difficulty, categoryID);
+        db.updateQuestion(Integer.parseInt(questionId), question);
+    }
+
     private void loadCategories(){
         DbHelper dbHelper = DbHelper.getInstance(this);
         List<QuestionCategorie> categories = dbHelper.getAllCategories();
@@ -138,7 +182,7 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
     private void loadAnswerSpinner() {
         String[] answers = new String[]{ "1", "2", "3", "4" };;
 
-        ArrayAdapter<String> adapterAnswers = new ArrayAdapter<String>(this,
+        adapterAnswers = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, answers);
         adapterAnswers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAnswers.setAdapter(adapterAnswers);

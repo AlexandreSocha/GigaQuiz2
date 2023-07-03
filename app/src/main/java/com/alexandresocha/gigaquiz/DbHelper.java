@@ -135,6 +135,24 @@ public class DbHelper extends SQLiteOpenHelper {
             insertQuestion(question);
         }
     }
+
+    public void updateQuestion(int id, Question question){
+        db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(Table.Questions.COL_QUESTION, question.getQuestion());
+        cv.put(Table.Questions.COL_OPTION_1, question.getOption1());
+        cv.put(Table.Questions.COL_OPTION_2, question.getOption2());
+        cv.put(Table.Questions.COL_OPTION_3, question.getOption3());
+        cv.put(Table.Questions.COL_OPTION_4, question.getOption4());
+        cv.put(Table.Questions.COL_REPONSE, question.getAnswerNr());
+        cv.put(Table.Questions.COL_DIFFICULTE, question.getDifficulty());
+        cv.put(Table.Questions.COL_CATEGORIE_ID, question.getCategoryID());
+
+        String selection = Table.Questions._ID + " = ? ";
+        String[] selectionArgs = new String[]{ String.valueOf(id) };
+
+        db.update(Table.Questions.TABLE_NAME, cv, selection, selectionArgs);
+    }
     private void insertQuestion(Question question){
         ContentValues cv = new ContentValues();
         cv.put(Table.Questions.COL_QUESTION, question.getQuestion());
