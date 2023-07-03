@@ -163,6 +163,11 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         db.updateQuestion(Integer.parseInt(questionId), question);
     }
 
+    private void deleteQuestion(){
+        DbHelper db = DbHelper.getInstance(this);
+        db.deleteQuestion(Integer.parseInt(questionId));
+    }
+
     private void loadCategories(){
         DbHelper dbHelper = DbHelper.getInstance(this);
         List<QuestionCategorie> categories = dbHelper.getAllCategories();

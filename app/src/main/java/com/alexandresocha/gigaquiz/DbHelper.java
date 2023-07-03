@@ -152,6 +152,14 @@ public class DbHelper extends SQLiteOpenHelper {
         String[] selectionArgs = new String[]{ String.valueOf(id) };
 
         db.update(Table.Questions.TABLE_NAME, cv, selection, selectionArgs);
+        db.delete(Table.Questions.TABLE_NAME, selection, selectionArgs);
+    }
+    public void deleteQuestion(int id){
+        db = getWritableDatabase();
+
+        String selection = Table.Questions._ID + " = ? ";
+        String[] selectionArgs = new String[]{ String.valueOf(id) };
+        db.delete(Table.Questions.TABLE_NAME, selection, selectionArgs);
     }
     private void insertQuestion(Question question){
         ContentValues cv = new ContentValues();
