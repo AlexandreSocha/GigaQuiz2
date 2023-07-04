@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -21,7 +23,7 @@ import java.util.Locale;
 public class QuizActivity extends AppCompatActivity {
 
     public static final String EXTRA_SCORE = "extraScore";
-    private static final long COUNTDOWN_IN_MILLIS = 30000;
+    private static long COUNTDOWN_IN_MILLIS = 30000;
 
     private static final String KEY_SCORE = "keyScore";
     private static final String KEY_QUESTION_COUNT = "keyQuestionCount";
@@ -190,15 +192,22 @@ public class QuizActivity extends AppCompatActivity {
         }
     }
 
+    private void manageExpertMode(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if(preferences.contains("mode_expert") && preferences.getBoolean("mode_expert",false) == true)
+            COUNTDOWN_IN_MILLIS = 10000;
+        else
+            COUNTDOWN_IN_MILLIS = 30000;
+    }
     private void startCountdown(){
-
+        manageExpertMode();
         mProgressBar.setProgress(100);
         countDownTimer = new CountDownTimer(timeLeftInMillis, 10) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
-                int progress = (int) (timeLeftInMillis/(30000/100));
+                int progress = (int) (timeLeftInMillis/(COUNTDOWN_IN_MILLIS/100));
                 mProgressBar.setProgress(progress);
             }
 
@@ -214,7 +223,7 @@ public class QuizActivity extends AppCompatActivity {
     }
     private void updateCountDownText(){
 
-        if(timeLeftInMillis < 10000){
+        if(timeLeftInMillis < (COUNTDOWN_IN_MILLIS/3)){
             mProgressBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
         } else {
             mProgressBar.setProgressTintList(ColorStateList.valueOf(Color.GREEN));

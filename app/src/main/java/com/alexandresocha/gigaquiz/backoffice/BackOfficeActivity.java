@@ -34,5 +34,14 @@ public class BackOfficeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button buttonGererSettings = findViewById(R.id.btn_gerer_parametres);
+        buttonGererSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BackOfficeActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

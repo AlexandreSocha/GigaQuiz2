@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,6 +37,9 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
     private ArrayAdapter<QuestionCategorie> adapterCategories;
 
     private ArrayAdapter<String> adapterAnswers;
+
+    private LinearLayout btnAddQstContainer;
+    private LinearLayout btnUpdQstContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,8 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         answer2 = findViewById(R.id.edit_text_answer_2);
         answer3 = findViewById(R.id.edit_text_answer_3);
         answer4 = findViewById(R.id.edit_text_answer_4);
+        btnAddQstContainer = (LinearLayout) findViewById(R.id.container_btn_add);
+        btnUpdQstContainer = (LinearLayout) findViewById(R.id.container_update_question);
 
         loadCategories();
         loadDifficulties();
@@ -56,8 +62,8 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Question q = intent.getParcelableExtra("selectedQuestion");
 
-        Button btn = findViewById(R.id.btn_add_new_question);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button btnAddQst = findViewById(R.id.btn_add_new_question);
+        btnAddQst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addNewQuestion();
@@ -65,11 +71,20 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
             }
         });
 
-        Button btnUpdate = findViewById(R.id.btn_update_question);
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        Button btnUpdQst = findViewById(R.id.btn_update_question);
+        btnUpdQst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateQuestion();
+                finish();
+            }
+        });
+
+        Button btnDelQuestion = findViewById(R.id.btn_delete_question);
+        btnDelQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteQuestion();
                 finish();
             }
         });
@@ -78,12 +93,12 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
             isEdit = true;
             questionId = String.valueOf(q.getId());
             populateFields(q);
-            btn.setVisibility(View.INVISIBLE);
-            btnUpdate.setVisibility(View.VISIBLE);
+            btnAddQstContainer.setVisibility(View.GONE);
+            btnUpdQstContainer.setVisibility(View.VISIBLE);
         }
         else {
-            btn.setVisibility(View.VISIBLE);
-            btnUpdate.setVisibility(View.INVISIBLE);
+            btnAddQstContainer.setVisibility(View.VISIBLE);
+            btnUpdQstContainer.setVisibility(View.GONE);
         }
 
 

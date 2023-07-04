@@ -3,7 +3,9 @@ package com.alexandresocha.gigaquiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,8 +40,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, BackOfficeActivity.class);
                 startActivity(intent);
-                //Toast.makeText(MainActivity.this, "Back-office", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        TextView bienvenueMsg = findViewById(R.id.txv_bienvenue);
+        if(preferences.contains("pseudo_user")){
+            bienvenueMsg.setText("Bienvenue " + preferences.getString("pseudo_user", null) + "!");
+        } else {
+            bienvenueMsg.setText("Bienvenue !");
+        }
     }
 }
