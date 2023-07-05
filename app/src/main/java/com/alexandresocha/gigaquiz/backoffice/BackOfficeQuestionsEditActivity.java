@@ -1,7 +1,9 @@
 package com.alexandresocha.gigaquiz.backoffice;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -84,8 +86,20 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         btnDelQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteQuestion();
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(BackOfficeQuestionsEditActivity.this);
+                builder.setMessage("Êtes-vous bien sûr de vouloir supprimer cette question ?");
+                builder.setTitle("Avertissement");
+                // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+                builder.setCancelable(false);
+                builder.setPositiveButton("Oui", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    deleteQuestion();
+                    finish();
+                });
+                builder.setNegativeButton("Non", (DialogInterface.OnClickListener) (dialog, which) -> {
+                    dialog.cancel();
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
@@ -151,6 +165,7 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         Question question = new Question(questionText, answer1Text, answer2Text,
                 answer3Text, answer4Text, answer, difficulty, categoryID);
         db.addQuestion(question);
+        Toast.makeText(BackOfficeQuestionsEditActivity.this, "Nouvelle question créée", Toast.LENGTH_SHORT).show();
     }
 
     private void updateQuestion(){
@@ -176,11 +191,13 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         Question question = new Question(questionText, answer1Text, answer2Text,
                 answer3Text, answer4Text, answer, difficulty, categoryID);
         db.updateQuestion(Integer.parseInt(questionId), question);
+        Toast.makeText(BackOfficeQuestionsEditActivity.this, "Question modifiée", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteQuestion(){
         DbHelper db = DbHelper.getInstance(this);
         db.deleteQuestion(Integer.parseInt(questionId));
+        Toast.makeText(BackOfficeQuestionsEditActivity.this, "Question supprimée", Toast.LENGTH_SHORT).show();
     }
 
     private void loadCategories(){

@@ -22,44 +22,70 @@
         android:layout_below="@+id/txv_backoffice_title"
         android:textSize="22sp"/>
 
-    <Button
-        android:id="@+id/btn_gerer_questions"
-        android:backgroundTint="@color/blue5"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gérer les questions"
-        android:layout_marginTop="28dp"
-        android:layout_below="@+id/txv_backoffice_title2"/>
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_marginTop="150dp"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:weightSum="1.0"
+        android:layout_below="@+id/txv_backoffice_title2">
 
-    <Button
-        android:id="@+id/btn_gerer_categories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue5"
-        android:text="Gérer les catégories"
-        android:textColor="@color/white"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/btn_gerer_questions"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight=".5"
+            android:weightSum="1.0">
 
-    <Button
-        android:id="@+id/btn_gerer_banque_images"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue5"
-        android:textColor="@color/white"
-        android:text="Gérer la banque d'image"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/btn_gerer_categories"/>
+            <Button
+                android:id="@+id/btn_gerer_questions"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:layout_marginRight="4dp"
+                android:text="Gérer \nquestions"/>
+            <Button
+                android:id="@+id/btn_gerer_categories"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:layout_marginLeft="4dp"
+                android:text="Gérer \ncatégories"/>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_gerer_parametres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue5"
-        android:textColor="@color/white"
-        android:text="Parametres generaux"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/btn_gerer_banque_images"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:layout_margin="0dp"
+            android:weightSum="1.0">
+
+            <Button
+                android:id="@+id/btn_gerer_banque_images"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="4dp"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:text="Banque \nd'images"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_gerer_parametres"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:backgroundTint="@color/blue5"
+                android:layout_marginLeft="4dp"
+                android:text="Paramètres \ngénéraux"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

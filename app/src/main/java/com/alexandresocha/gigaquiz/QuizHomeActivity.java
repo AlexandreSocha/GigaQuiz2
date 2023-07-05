@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class QuizHomeActivity extends AppCompatActivity {
                 startQuiz();
             }
         });
+
+
     }
 
     private void loadCategories(){

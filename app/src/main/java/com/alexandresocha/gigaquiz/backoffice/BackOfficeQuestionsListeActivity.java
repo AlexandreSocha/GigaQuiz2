@@ -10,10 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.alexandresocha.gigaquiz.DbHelper;
 import com.alexandresocha.gigaquiz.Question;
 import com.alexandresocha.gigaquiz.QuestionCategorie;
+import com.alexandresocha.gigaquiz.QuizHomeActivity;
 import com.alexandresocha.gigaquiz.R;
 
 import java.util.ArrayList;
@@ -48,16 +50,24 @@ public class BackOfficeQuestionsListeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        Button btnFiltrer = findViewById(R.id.btn_filtrer_questions);
-        btnFiltrer.setOnClickListener(new View.OnClickListener() {
+        spinnerCategorie.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                QuestionCategorie selectedCategory = (QuestionCategorie) spinnerCategorie.getSelectedItem();
-                int categoryID = selectedCategory.getId();
-                String categoryName = selectedCategory.getName();
-                String difficulty = spinnerDifficulte.getSelectedItem().toString();
-                populateListView(categoryID, difficulty);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Search();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerDifficulte.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Search();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -67,7 +77,14 @@ public class BackOfficeQuestionsListeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //populateListView();
+        Search();
+    }
+
+    private void Search(){
+        QuestionCategorie selectedCategory = (QuestionCategorie) spinnerCategorie.getSelectedItem();
+        int categoryID = selectedCategory.getId();
+        String difficulty = spinnerDifficulte.getSelectedItem().toString();
+        populateListView(categoryID, difficulty);
     }
 
     public void populateListView(int categoryID, String difficulty) {
@@ -88,6 +105,9 @@ public class BackOfficeQuestionsListeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        listView.setVisibility(View.VISIBLE);
     }
 
     private void loadCategories(){
