@@ -29,15 +29,6 @@ public class BackOfficeCategoriesListeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_back_office_categories_liste);
 
         listView = (ListView) findViewById(R.id.lvw_categories);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(BackOfficeCategoriesListeActivity.this, BackOfficeCategoriesEditActivity.class);
-                intent.putExtra("selected_category", String.valueOf(myAdapter.getItemId(i)));
-                startActivity(intent);
-            }
-        });
-
         Button btn = findViewById(R.id.btn_liste_categories_gerer_categories);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,5 +52,15 @@ public class BackOfficeCategoriesListeActivity extends AppCompatActivity {
         myAdapter = new ArrayAdapter<QuestionCategorie>(this,
                 android.R.layout.simple_list_item_1, categories);
         listView.setAdapter(myAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                QuestionCategorie c = (QuestionCategorie) myAdapter.getItem(i);
+                Intent intent = new Intent(BackOfficeCategoriesListeActivity.this, BackOfficeCategoriesEditActivity.class);
+                intent.putExtra("selectedCategory", c);
+                startActivity(intent);
+            }
+        });
     }
 }

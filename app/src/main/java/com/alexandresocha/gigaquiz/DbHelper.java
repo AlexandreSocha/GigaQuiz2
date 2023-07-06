@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "GigaQuiz.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static DbHelper instance;
     private SQLiteDatabase db;
@@ -79,6 +79,25 @@ public class DbHelper extends SQLiteOpenHelper {
         insertCategory(category);
     }
 
+    public void updateCategory(int id, QuestionCategorie category){
+        db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(Table.Categories.COL_LIBELLE, category.getName());
+
+        String selection = Table.Categories._ID + " = ? ";
+        String[] selectionArgs = new String[]{ String.valueOf(id) };
+
+        db.update(Table.Categories.TABLE_NAME, cv, selection, selectionArgs);
+    }
+
+    public void deleteCategory(int id){
+        db = getWritableDatabase();
+
+        String selection = Table.Categories._ID + " = ? ";
+        String[] selectionArgs = new String[]{ String.valueOf(id) };
+        db.delete(Table.Categories.TABLE_NAME, selection, selectionArgs);
+    }
+
     public void addCategories(List<QuestionCategorie> categories){
         db = getWritableDatabase();
 
@@ -93,11 +112,11 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     private void fillCategoriesTable(){
-        QuestionCategorie c1 = new QuestionCategorie("Programming");
+        QuestionCategorie c1 = new QuestionCategorie("Programmation");
         insertCategory(c1);
-        QuestionCategorie c2 = new QuestionCategorie("Geography");
+        QuestionCategorie c2 = new QuestionCategorie("Geographie");
         insertCategory(c2);
-        QuestionCategorie c3 = new QuestionCategorie("Math");
+        QuestionCategorie c3 = new QuestionCategorie("Mathématiques");
         insertCategory(c3);
     }
     private void fillQuestionsTable(){

@@ -66,6 +66,7 @@
             android:weightSum="1.0">
 
             <Button
+                android:enabled="false"
                 android:id="@+id/btn_gerer_banque_images"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

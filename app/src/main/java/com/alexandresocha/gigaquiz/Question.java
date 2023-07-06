@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 
 public class Question implements Parcelable {
 
-    public static final String DIFFICULTY_EASY = "Easy";
-    public static final String DIFFICULTY_MEDIUM = "Medium";
-    public static final String DIFFICULTY_HARD = "Hard";
+    public static final String DIFFICULTY_EASY = "Facile";
+    public static final String DIFFICULTY_MEDIUM = "Moyen";
+    public static final String DIFFICULTY_HARD = "Difficile";
 
     private int id;
     private String question;
@@ -164,6 +164,6 @@ public class Question implements Parcelable {
     @NonNull
     @Override
     public String toString() {
-        return getCategoryID() + " - " + getDifficulty() + " - " + getQuestion();
+        return getQuestion();
     }
 }

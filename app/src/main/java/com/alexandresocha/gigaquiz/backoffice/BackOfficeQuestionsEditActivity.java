@@ -23,8 +23,7 @@ import java.util.List;
 
 public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
 
-    private String questionId;
-    private boolean isEdit = false;
+    private int questionId;
     private Spinner spinnerCategory;
     private Spinner spinnerDifficulty;
     private Spinner spinnerAnswers;
@@ -37,7 +36,6 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapterDifficulty;
     private ArrayAdapter<QuestionCategorie> adapterCategories;
-
     private ArrayAdapter<String> adapterAnswers;
 
     private LinearLayout btnAddQstContainer;
@@ -104,8 +102,7 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         });
 
         if(q != null){
-            isEdit = true;
-            questionId = String.valueOf(q.getId());
+            questionId = q.getId();
             populateFields(q);
             btnAddQstContainer.setVisibility(View.GONE);
             btnUpdQstContainer.setVisibility(View.VISIBLE);
@@ -114,9 +111,6 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
             btnAddQstContainer.setVisibility(View.VISIBLE);
             btnUpdQstContainer.setVisibility(View.GONE);
         }
-
-
-
     }
 
     private void populateFields(Question q){
@@ -133,12 +127,8 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
         spinnerDifficulty.setSelection(positionDifficulty);
 
         DbHelper dbHelper = DbHelper.getInstance(this);
-
-        // c'est ici que ça marche pas, positionCategory est toujours -1
-        // alors que l'item est bien dans la liste
         QuestionCategorie categ = dbHelper.getCategory(q.getCategoryID());
         int positionCategory = adapterCategories.getPosition(categ);
-        Toast.makeText(this, "positionCategory : " + positionCategory, Toast.LENGTH_LONG).show();
         spinnerCategory.setSelection(positionCategory);
     }
 
@@ -190,13 +180,13 @@ public class BackOfficeQuestionsEditActivity extends AppCompatActivity {
 
         Question question = new Question(questionText, answer1Text, answer2Text,
                 answer3Text, answer4Text, answer, difficulty, categoryID);
-        db.updateQuestion(Integer.parseInt(questionId), question);
+        db.updateQuestion(questionId, question);
         Toast.makeText(BackOfficeQuestionsEditActivity.this, "Question modifiée", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteQuestion(){
         DbHelper db = DbHelper.getInstance(this);
-        db.deleteQuestion(Integer.parseInt(questionId));
+        db.deleteQuestion(questionId);
         Toast.makeText(BackOfficeQuestionsEditActivity.this, "Question supprimée", Toast.LENGTH_SHORT).show();
     }
 

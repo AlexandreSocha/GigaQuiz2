@@ -43,13 +43,64 @@
         android:layout_alignEnd="@+id/txv_title_categorie"
         />
 
-
-    <Button
-        android:id="@+id/btn_add_new_categorie"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/container_btn_add"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue5"
-        android:layout_centerInParent="true"
-        android:textColor="@color/white"
-        android:text="Ajouter categorie" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="6dp"
+        android:layout_marginTop="130dp"
+        android:layout_below="@+id/edt_libelle_categorie_label"
+        android:visibility="gone"
+        android:weightSum="3"
+        >
+
+        <Button
+            android:id="@+id/btn_add_new_categorie"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue5"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_weight="1"
+
+            android:text="Ajouter" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_update_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_below="@+id/container_btn_add"
+        android:visibility="visible"
+        android:weightSum="2"
+        >
+
+        <Button
+            android:id="@+id/btn_update_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue5"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="5dp"
+            android:text="Modifier" />
+        <Button
+            android:id="@+id/btn_delete_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue5"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp"
+            android:text="Supprimer" />
+    </LinearLayout>
+
 </RelativeLayout>
