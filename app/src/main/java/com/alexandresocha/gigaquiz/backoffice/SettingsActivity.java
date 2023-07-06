@@ -38,7 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
     private void displaySettings(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if(preferences.contains("mode_expert") && preferences.getBoolean("mode_expert",false) == true)
+        if(preferences.contains("mode_expert") && preferences.getBoolean("mode_expert", false))
             checkBox.setChecked(true);
         else
             checkBox.setChecked(false);

@@ -185,7 +185,6 @@ public class QuizActivity extends AppCompatActivity {
             textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
             answered = false;
 
-            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
             startCountdown();
         } else{
             finishQuiz();
@@ -198,7 +197,9 @@ public class QuizActivity extends AppCompatActivity {
             COUNTDOWN_IN_MILLIS = 10000;
         else
             COUNTDOWN_IN_MILLIS = 30000;
+        timeLeftInMillis = COUNTDOWN_IN_MILLIS;
     }
+
     private void startCountdown(){
         manageExpertMode();
         mProgressBar.setProgress(100);
