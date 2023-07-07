@@ -120,26 +120,36 @@ public class DbHelper extends SQLiteOpenHelper {
         insertCategory(c3);
     }
     private void fillQuestionsTable(){
-        Question q1 = new Question("Microsoft Excel est un ...",
-                "Compilateur", "Débugger", "Programme", "Langage", 3,
-                Question.DIFFICULTY_EASY, QuestionCategorie.PROGRAMMING);
-        insertQuestion(q1);
-        Question q2 = new Question("Le langage que l'ordinateur comprend est",
-                "Java", "Visual Basic", "Binaire","Les non binaires", 3,
-                Question.DIFFICULTY_EASY, QuestionCategorie.PROGRAMMING);
-        insertQuestion(q2);
-        Question q3 = new Question("L'un de ceux-ci n'est pas un programme :",
-                "Le code source", "L'IDE", "Le compilateur","Word", 1,
-                Question.DIFFICULTY_EASY, QuestionCategorie.PROGRAMMING);
-        insertQuestion(q3);
-        Question q4 = new Question("Le C++ est un ...",
-                "Debugger", "Compilateur", "Langage haut niveau", "Langage bas niveau",3,
-                Question.DIFFICULTY_MEDIUM, QuestionCategorie.PROGRAMMING);
-        insertQuestion(q4);
-        Question q5 = new Question("Le programme qui fait la traduction en langage binaire est dit ...",
-                "Compilateur", "Debugger", "Editeur de texte", "Traducteur",1,
-                Question.DIFFICULTY_MEDIUM, QuestionCategorie.PROGRAMMING);
-        insertQuestion(q5);
+        //INFORMATIQUE
+        insertQuestion(new Question("Microsoft Excel est un ...","Compilateur", "Débugger", "Programme", "Langage", 3, Question.DIFFICULTY_EASY, QuestionCategorie.PROGRAMMING));
+        insertQuestion(new Question("Le langage que l'ordinateur comprend est","Java", "Visual Basic", "Binaire","Les non binaires", 3, Question.DIFFICULTY_EASY, QuestionCategorie.PROGRAMMING));
+        insertQuestion(new Question("L'un de ceux-ci n'est pas un programme :","Le code source", "L'IDE", "Le compilateur","Word", 1, Question.DIFFICULTY_EASY, QuestionCategorie.PROGRAMMING));
+
+        insertQuestion(new Question("Le C++ est un ...","Debugger", "Compilateur", "Langage haut niveau", "Langage bas niveau",3, Question.DIFFICULTY_MEDIUM, QuestionCategorie.PROGRAMMING));
+        insertQuestion(new Question("Le programme qui fait la traduction en langage binaire est dit ...","Compilateur", "Debugger", "Editeur de texte", "Traducteur",1,Question.DIFFICULTY_MEDIUM, QuestionCategorie.PROGRAMMING));
+
+        //GEOGRAPHIE
+        insertQuestion(new Question("Dans lequel de ces pays, peut-on voir l’une des 7 nouvelles Merveilles du monde ?", "France", "Espagne", "Italie", "Grèce",3, Question.DIFFICULTY_EASY, QuestionCategorie.GEOGRAPHY));
+        insertQuestion(new Question("Dans quel pays se trouve Pétra, l’une des nouvelles Merveilles du monde ?", "Iran", "Jordanie", "Israël", "Turquie",2, Question.DIFFICULTY_EASY, QuestionCategorie.GEOGRAPHY));
+        insertQuestion(new Question("Quelle est la capitale de l’Italie ?", "Turin", "Milan", "Naples", "Rome",4, Question.DIFFICULTY_EASY, QuestionCategorie.GEOGRAPHY));
+
+        insertQuestion(new Question("Quel lac de la cordillère des Andes marque la frontière entre le Pérou et la Bolivie ?", "Grand lac salé", "Atitlan", "Albert", "Titicaca",4, Question.DIFFICULTY_MEDIUM, QuestionCategorie.GEOGRAPHY));
+        insertQuestion(new Question("Quelle est la capitale de la Finlande ?", "Stockholm", "Helsinki", "Turku", "Oslo",2, Question.DIFFICULTY_MEDIUM, QuestionCategorie.GEOGRAPHY));
+        insertQuestion(new Question("Quelle est la capitale de la Bulgarie ?", "Istanbul", "Plovdiv", "Sofia", "Bucarest",3, Question.DIFFICULTY_MEDIUM, QuestionCategorie.GEOGRAPHY));
+
+        insertQuestion(new Question("Dans quel pays trouve-t-on le plus de pyramides ?", "Mexique", "Pérou", "Egypte", "Soudan",4, Question.DIFFICULTY_HARD, QuestionCategorie.GEOGRAPHY));
+        insertQuestion(new Question("Quel est l’ancien nom du royaume du Maroc ?", "Empire tetouan", "Empire chérifien", "Royaume Haoussa", "Royaume de Saloum",2, Question.DIFFICULTY_HARD, QuestionCategorie.GEOGRAPHY));
+        insertQuestion(new Question("Dans quelle ville d’Inde se trouve le Taj Mahal ?", "Mumbaï", "Agra", "Bangalore", "Jaïpur",2, Question.DIFFICULTY_HARD, QuestionCategorie.GEOGRAPHY));
+
+        //MATHEMATIQUES
+        insertQuestion(new Question("Quel est le résultat de l’opération 73 - 8 ?", "63", "64", "65", "66", 3, Question.DIFFICULTY_EASY, QuestionCategorie.MATH));
+        insertQuestion(new Question("Quel est le résultat de l’opération : 3 + 2 x 3 ?", "9", "12", "13", "15", 1, Question.DIFFICULTY_EASY, QuestionCategorie.MATH));
+
+        insertQuestion(new Question("Quel est le résultat de l’opération : 32 + 17 ?", "48", "49", "50", "51", 2, Question.DIFFICULTY_MEDIUM, QuestionCategorie.MATH));
+        insertQuestion(new Question("Quel est le résultat de l’opération : 19 x 2 + 43 ?", "78", "79", "80", "81", 4, Question.DIFFICULTY_MEDIUM, QuestionCategorie.MATH));
+        insertQuestion(new Question("Quel est le résultat de l’opération : 125 + 90 - 6 ?", "205", "207", "209", "211", 3, Question.DIFFICULTY_MEDIUM, QuestionCategorie.MATH));
+
+        insertQuestion(new Question("Je profite d’une promo de 20% sur un achat à 40€. Quel est le montant que je vais économiser ?", "5€", "8€", "10€", "12€", 2, Question.DIFFICULTY_HARD, QuestionCategorie.MATH));
     }
 
     public void addQuestion(Question question){

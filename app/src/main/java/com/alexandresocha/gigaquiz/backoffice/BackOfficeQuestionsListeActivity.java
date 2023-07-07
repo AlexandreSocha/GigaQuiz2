@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alexandresocha.gigaquiz.DbHelper;
@@ -30,12 +31,16 @@ public class BackOfficeQuestionsListeActivity extends AppCompatActivity {
     private ListView listView;
     private ArrayAdapter myAdapter;
 
+    private TextView txvNumberOfItems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_back_office_questions_liste);
 
         listView = (ListView) findViewById(R.id.lvw_categ);
+        txvNumberOfItems = (TextView) findViewById(R.id.txv_number_items);
+
 
         spinnerCategorie = findViewById(R.id.spn_categ);
         spinnerDifficulte = findViewById(R.id.spn_diffi);
@@ -91,6 +96,8 @@ public class BackOfficeQuestionsListeActivity extends AppCompatActivity {
 
         DbHelper db = DbHelper.getInstance(this);
         ArrayList<Question> questions = db.getQuestions(categoryID, difficulty);
+        int nb = questions.size();
+        txvNumberOfItems.setText("(" +nb+" questions)");
 
         myAdapter = new ArrayAdapter<Question>(this,
                 android.R.layout.simple_list_item_1, questions);

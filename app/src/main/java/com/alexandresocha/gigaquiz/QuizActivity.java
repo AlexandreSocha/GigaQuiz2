@@ -44,10 +44,6 @@ public class QuizActivity extends AppCompatActivity {
     private Button buttonAnswer3;
     private Button buttonAnswer4;
 
-
-    private ColorStateList textColorDefaultRb;
-    private ColorStateList textColorDefaultCd;
-
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
 
@@ -80,8 +76,8 @@ public class QuizActivity extends AppCompatActivity {
         buttonAnswer2 = findViewById(R.id.btn_answer_2);
         buttonAnswer3 = findViewById(R.id.btn_answer_3);
         buttonAnswer4 = findViewById(R.id.btn_answer_4);
-        //textColorDefaultCd = textViewCountDown.getTextColors();
 
+        // on récupère les informations de l'écran précédent (catégorie + difficulté)
         Intent intent = getIntent();
         int categoryID = intent.getIntExtra(QuizHomeActivity.EXTRA_CATEGORIE_ID, 0);
         String categoryName = intent.getStringExtra(QuizHomeActivity.EXTRA_CATEGORIE_NAME);
@@ -91,14 +87,15 @@ public class QuizActivity extends AppCompatActivity {
         textViewDifficulty.setText("Difficulty: " + difficulty);
 
         if(savedInstanceState == null){
+            // si le bundle est vide, on va cherche en base
             DbHelper dbHelper = DbHelper.getInstance(this);
             questionList = dbHelper.getQuestions(categoryID, difficulty);
-            ArrayList<Question> allQuestions = dbHelper.getAllQuestions();
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
 
             showNextQuestion();
         } else {
+            // sinon on récupère du bundle
             questionList = savedInstanceState.getParcelableArrayList(KEY_QUESTION_LIST);
             questionCountTotal = questionList.size();
             questionCounter = savedInstanceState.getInt(KEY_QUESTION_COUNT);
@@ -252,23 +249,21 @@ public class QuizActivity extends AppCompatActivity {
         switch(currentQuestion.getAnswerNr()){
             case 1:
                 buttonAnswer1.setBackgroundColor(Color.GREEN);
-                textViewQuestion.setText("Answer 1 is correct");
+                textViewQuestion.setText("La réponse était: \nla réponse 1");
                 break;
             case 2:
                 buttonAnswer2.setBackgroundColor(Color.GREEN);
-                textViewQuestion.setText("Answer 2 is correct");
+                textViewQuestion.setText("La réponse était: \nla réponse 2");
                 break;
             case 3:
                 buttonAnswer3.setBackgroundColor(Color.GREEN);
-                textViewQuestion.setText("Answer 3 is correct");
+                textViewQuestion.setText("La réponse était: \nla réponse 3");
                 break;
             case 4:
                 buttonAnswer4.setBackgroundColor(Color.GREEN);
-                textViewQuestion.setText("Answer 4 is correct");
+                textViewQuestion.setText("La réponse était: \nla réponse 4");
                 break;
         }
-
-
 
         if(questionCounter < questionCountTotal){
             buttonConfirmNext.setText("Continuer");
